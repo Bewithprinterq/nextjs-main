@@ -18,9 +18,9 @@ const Navbar01Page = () => {
           <NavMenu className="hidden md:block" />
 
           <div className="flex items-center gap-3">
-
-            <Badge className="p-2 text-sm"><ShoppingBasket /><CountCartItem/>(s)</Badge>
-
+          <Link href="/cart">
+            <Badge className="p-2 text-sm"><ShoppingBasket /><CountCartItem/>item (s)</Badge>
+          </Link>
             <Button asChild variant="outline" className="hidden sm:inline-flex">
               <Link href="/login">เข้าสู่ระบบ</Link>
             </Button>
