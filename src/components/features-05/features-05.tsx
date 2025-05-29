@@ -34,7 +34,7 @@ const Features05Page = ({courses} : Features05PageProps) => {
                   width={0} 
                   height={0}
                   sizes="100vw"
-                  style={{ width: '100%', height: 150 }}
+                  style={{ width: '100%', height: 250 }}
                   priority 
                 />
               </CardContent>
