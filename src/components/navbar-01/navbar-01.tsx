@@ -5,6 +5,7 @@ import { NavigationSheet } from "./navigation-sheet";
 import Link from "next/link";
 import { ShoppingBasket } from "lucide-react";
 import { Badge } from "../ui/badge";
+import CountCartItem from "@/app/(front)/components/CountCartItem";
 
 const Navbar01Page = () => {
   return (
@@ -18,7 +19,7 @@ const Navbar01Page = () => {
 
           <div className="flex items-center gap-3">
 
-            <Badge className="p-2 text-sm"><ShoppingBasket /> 0 item (s)</Badge>
+            <Badge className="p-2 text-sm"><ShoppingBasket /><CountCartItem/>(s)</Badge>
 
             <Button asChild variant="outline" className="hidden sm:inline-flex">
               <Link href="/login">เข้าสู่ระบบ</Link>
