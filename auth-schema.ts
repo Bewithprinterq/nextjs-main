@@ -1,38 +1,29 @@
-import { mysqlTable, primaryKey, int, varchar, decimal,timestamp, boolean, text } from "drizzle-orm/mysql-core"
-
-export const product = mysqlTable("product", {
-    id: int({ unsigned: true }).autoincrement().notNull(),
-    title: varchar({ length: 255 }).notNull(),
-    price: decimal({ precision: 10, scale: 2 }).notNull(),
-},
-(table) => [
-    primaryKey({ columns: [table.id], name: "product_id"}),
-]);
+import { mysqlTable, varchar, text, timestamp, boolean} from "drizzle-orm/mysql-core";
 
 export const user = mysqlTable("user", {
-                    id: varchar('id', { length: 36 }).primaryKey(),
-                    name: text('name').notNull(),
+					id: varchar('id', { length: 36 }).primaryKey(),
+					name: text('name').notNull(),
  email: varchar('email', { length: 255 }).notNull().unique(),
  emailVerified: boolean('email_verified').$defaultFn(() => false).notNull(),
  image: text('image'),
  createdAt: timestamp('created_at').$defaultFn(() => /* @__PURE__ */ new Date()).notNull(),
  updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date()).notNull()
-                });
+				});
 
 export const session = mysqlTable("session", {
-                    id: varchar('id', { length: 36 }).primaryKey(),
-                    expiresAt: timestamp('expires_at').notNull(),
+					id: varchar('id', { length: 36 }).primaryKey(),
+					expiresAt: timestamp('expires_at').notNull(),
  token: varchar('token', { length: 255 }).notNull().unique(),
  createdAt: timestamp('created_at').notNull(),
  updatedAt: timestamp('updated_at').notNull(),
  ipAddress: text('ip_address'),
  userAgent: text('user_agent'),
  userId: text('user_id').notNull().references(()=> user.id, { onDelete: 'cascade' })
-                });
+				});
 
 export const account = mysqlTable("account", {
-                    id: varchar('id', { length: 36 }).primaryKey(),
-                    accountId: text('account_id').notNull(),
+					id: varchar('id', { length: 36 }).primaryKey(),
+					accountId: text('account_id').notNull(),
  providerId: text('provider_id').notNull(),
  userId: text('user_id').notNull().references(()=> user.id, { onDelete: 'cascade' }),
  accessToken: text('access_token'),
@@ -44,13 +35,13 @@ export const account = mysqlTable("account", {
  password: text('password'),
  createdAt: timestamp('created_at').notNull(),
  updatedAt: timestamp('updated_at').notNull()
-                });
+				});
 
 export const verification = mysqlTable("verification", {
-                    id: varchar('id', { length: 36 }).primaryKey(),
-                    identifier: text('identifier').notNull(),
+					id: varchar('id', { length: 36 }).primaryKey(),
+					identifier: text('identifier').notNull(),
  value: text('value').notNull(),
  expiresAt: timestamp('expires_at').notNull(),
  createdAt: timestamp('created_at').$defaultFn(() => /* @__PURE__ */ new Date()),
  updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date())
-                });
+				});
