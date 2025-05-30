@@ -12,14 +12,9 @@ import {
 import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+// import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-// import type { Metadata } from "next";
-
-// export const metadata: Metadata = {
-//   title: "สมัครสมาชิก",
-//   description: "ขายสินค้าของนักศึกษา ประจำปี 2568",
-// };
 
 const formSchema = z.object({
   email: z.string().email("รูปแบบอีเมลไม่ถูกต้อง"),
@@ -27,6 +22,7 @@ const formSchema = z.object({
 });
 
 const Login01Page = () => {
+  // const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     defaultValues: {
       email: "",
