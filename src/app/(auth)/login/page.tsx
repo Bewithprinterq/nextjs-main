@@ -23,7 +23,7 @@ import { z } from "zod";
 
 const formSchema = z.object({
   email: z.string().email("รูปแบบอีเมลไม่ถูกต้อง"),
-  password: z.string().min(6, "รหัสผ่านต้องอย่างน้อย 6 ตัวอักษร"),
+  password: z.string().min(6, "รหัสผ่านไม่ถูกต้อง"),
 });
 
 const Login01Page = () => {
@@ -89,7 +89,7 @@ const Login01Page = () => {
               )}
             />
             <Button type="submit" className="mt-4 w-full">
-              Log In
+              เข้าสู่ระบบ
             </Button>
           </form>
         </Form>
