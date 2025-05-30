@@ -1,3 +1,5 @@
+//ฝั่ง server ใช้auth ฝั่ง client ใช้ authClient
+
 import { Button } from "@/components/ui/button";
 import { Logo } from "./logo";
 import { NavMenu } from "./nav-menu";
@@ -6,8 +8,13 @@ import Link from "next/link";
 import { ShoppingBasket } from "lucide-react";
 import { Badge } from "../ui/badge";
 import CountCartItem from "@/app/(front)/components/CountCartItem";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-const Navbar01Page = () => {
+const Navbar01Page = async () => {
+  const session = await auth.api.getSession({
+    headers: await headers()
+  });
   return (
     <div className="bg-muted">
       <nav className="h-16 bg-background border-b">
@@ -18,15 +25,34 @@ const Navbar01Page = () => {
           <NavMenu className="hidden md:block" />
 
           <div className="flex items-center gap-3">
-          <Link href="/cart">
-            <Badge className="p-2 text-sm"><ShoppingBasket /><CountCartItem/>item (s)</Badge>
+        <Link href="/cart">
+            <Badge className="p-2 text-sm"><ShoppingBasket /> <CountCartItem /> item (s)</Badge>
           </Link>
-            <Button asChild variant="outline" className="hidden sm:inline-flex">
+            {
+              !session && (
+              <>
+              <Button asChild variant="outline" className="hidden sm:inline-flex">
               <Link href="/login">เข้าสู่ระบบ</Link>
-            </Button>
-            <Button asChild>
+              </Button>
+              <Button asChild>
               <Link href="/signup">สมัครสมาชิก</Link>
-            </Button>
+              </Button>
+            </>
+            )
+            
+            }
+            {
+              session && (
+              <>
+              <div className="flex items-center">
+              Hello, {session?.user.name}
+              </div>
+              <Button variant="secondary" asChild>
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+              </>
+            )
+            }
 
             {/* Mobile Menu */}
             <div className="md:hidden">
